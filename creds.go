@@ -12,6 +12,7 @@ import (
 	"socket/auth" // change for $GOPATH
 )
 
+// go run creds.go <group name allowed to connect to the socket>
 func init() {
 	flag.Usage = func() {
 		_, _ = fmt.Fprintf(flag.CommandLine.Output(),
@@ -20,6 +21,7 @@ func init() {
 	}
 }
 
+// add the groups to our map 'groups'
 func parseGroupNames(args []string) map[string]struct{} {
 	groups := make(map[string]struct{})
 
@@ -36,6 +38,7 @@ func parseGroupNames(args []string) map[string]struct{} {
 	return groups
 }
 
+// send and recieve a ping pong as demo
 func handleConn(conn *net.UnixConn) error {
 	msg := []byte("PING")
 	b, err := conn.Write(msg)
